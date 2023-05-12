@@ -30,13 +30,11 @@ def get_changelog():
             m = release_header_pattern.match(line)
 
             if m is not None:
-                # Found the first release.
-                if not in_changelog_text:
-                    in_changelog_text = True
-                    version = m.group(1)
-                else:
+                if in_changelog_text:
                     # Found the next release.
                     break
+                in_changelog_text = True
+                version = m.group(1)
             elif in_changelog_text:
                 changelog_text += line
 
